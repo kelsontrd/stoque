@@ -1,0 +1,48 @@
+<h2>Relatório de Saída por Cliente</h2>
+
+<form method="get">
+    <label for="cliente">Cliente:</label>
+    <select name="cliente" id="cliente">
+        <option value="">-- Selecione --</option>
+        {% for c in clientes %}
+            <option value="{{ c.id }}" {% if c.id|stringformat:"s" == cliente_selecionado %}selected{% endif %}>
+                {{ c.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label for="data_inicio">Data início:</label>
+    <input type="date" name="data_inicio" value="{{ data_inicio }}">
+
+    <label for="data_fim">Data fim:</label>
+    <input type="date" name="data_fim" value="{{ data_fim }}">
+
+    <button type="submit">Buscar</button>
+</form>
+
+{% if cliente %}
+    <h3>Cliente: {{ cliente.name }}</h3>
+{% endif %}
+
+{% if saidas %}
+    <table>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in saidas %}
+                <tr>
+                    <td>{{ s.product.name }}</td>
+                    <td>{{ s.quantity }}</td>
+                    <td>{{ s.operation_date|date:"d/m/Y H:i" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nenhuma saída encontrada.</p>
+{% endif %}

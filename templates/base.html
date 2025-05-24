@@ -1,0 +1,148 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d6efd">
+
+    <!-- Ícones -->
+    <link rel="icon" href="{% static 'imgs/icon-192.png' %}" type="image/png">
+    <link rel="apple-touch-icon" href="{% static 'imgs/icon-180.png' %}">
+    <link rel="manifest" href="{% static 'json/manifest.json' %}">
+    <link rel="icon" href="{% static 'imgs/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Configurações para iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Nome do App">
+
+    <!-- Título dinâmico -->
+    <title>{% block title %}base{% endblock title %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <!-- CSS do Bootstrap (carregar primeiro) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Seus CSSs customizados (após o Bootstrap) -->
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuNavbar">
+          <ul class="navbar-nav ms-auto">
+
+            <!-- Entrada -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="entradaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Entrada
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="entradaDropdown">
+                <li><a class="dropdown-item" href="{% url 'entry_list' %}">Listar</a></li>
+                <li><a class="dropdown-item" href="{% url 'entry_create' %}">Adicionar</a></li>
+              </ul>
+            </li>
+
+            <!-- Saída -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="saidaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Saída
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="saidaDropdown">
+                <li><a class="dropdown-item" href="{% url 'out_product_list' %}">Listar</a></li>
+                <li><a class="dropdown-item" href="{% url 'out_product_create' %}">Adicionar</a></li>
+              </ul>
+            </li>
+
+            <!-- Mais Opções -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="maisDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Mais Opções
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="maisDropdown">
+                
+                <li class="dropdown-submenu">
+                  <a class="dropdown-item" href="#">Produtos</a>
+                  <ul class="submenu list-unstyled">
+                    <li><a class="dropdown-item" href="{% url 'product_list' %}">Ajustar Estoque</a></li>
+                    <li><a class="dropdown-item" href="{% url 'product_create' %}">Adicionar Produto</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                  <a class="dropdown-item" href="#">Clientes</a>
+                  <ul class="submenu list-unstyled">
+                    <li><a class="dropdown-item" href="{% url 'customer_list' %}">Listar Clientes</a></li>
+                    <li><a class="dropdown-item" href="{% url 'customer_create' %}">Adicionar Cliente</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                  <a class="dropdown-item" href="#">Relatórios</a>
+                  <ul class="submenu list-unstyled">
+                    <li><a class="dropdown-item" href="#">Produtos</a></li>
+                    <li><a class="dropdown-item" href="#">Entradas</a></li>
+
+                    <li class="dropdown-submenu">
+                      <a class="dropdown-item" href="#">Saídas</a>
+                      <ul class="submenu list-unstyled">
+                        <li><a class="dropdown-item" href="{% url 'customer_list' %}">Listar Clientes</a></li>
+                        <li><a class="dropdown-item" href="{% url 'customer_create' %}">Adicionar Cliente</a></li>
+                      </ul>
+                    </li>
+                    
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Logout -->
+            <li class="nav-item">
+              <form action="{% url 'logout' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="nav-link btn btn-link text-white" style="text-decoration: none;">Sair</button>
+              </form>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Wrapper: conteúdo principal flexível -->
+    <div class="wrapper flex-grow-1">
+      <header class="py-3">
+        <h2 class="text-center">{% block header %}{% endblock header %}</h2>
+      </header>
+
+      <main class="container pb-4">
+        {% block content %}{% endblock content %}
+      </main>
+    </div>
+
+    <!-- Rodapé fixado no fundo -->
+    <footer class="bg-primary text-white text-center py-3 mt-auto">
+      <div class="container">
+        <p class="mb-0">&copy; 2025 Kelson Araujo. Todos os direitos reservados. <br>É proibido o uso sem autorização. Versão BETA.</p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    {% block script %}
+      <script src="{% static 'js/nav.js' %}"></script>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
+</html>

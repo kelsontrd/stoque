@@ -1,0 +1,41 @@
+
+{% extends "base.html" %}
+{% block title %}Ajustar Produtos{% endblock title %}
+{% block header %}Ajuste De Produtos{% endblock header %}
+{% block content %}
+    <div class="table-responsive">
+        <table class="table table-bordered fs-6 fs-md-5 fs-lg-4">
+            <thead class="table-dark text-center">
+            <tr>
+                <th scope="col">Cod</th>
+                <th scope="col">Nome</th>
+                <th scope="col" class="text-nowrap">Und</th>
+                <th scope="col" class="text-nowrap">Quant</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <th scope="row">{{ product.cod }}</th>
+                    <td>{{ product.name }}</td>
+                    <td class="text-nowrap">{{ product.unity }}</td>
+                    <td class="text-nowrap">{{ product.quantity }}</td>
+                    <td class="text-nowrap">
+                        <a href="{% url 'product_update' product.pk %}" class="text-success me-2" title="Ajustar">
+                            <i class="bi bi-arrow-up-circle-fill fs-5"></i>
+                        </a>
+                        <a href="{% url 'product_delete' product.pk %}" class="text-danger" title="Deletar">
+                            <i class="bi bi-x-circle-fill fs-5"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">
+            <i class="bi bi-arrow-left-circle"></i> Voltar
+        </a>
+    </div>
+
+{% endblock content %}

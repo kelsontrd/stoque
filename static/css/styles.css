@@ -1,0 +1,56 @@
+/* Garante que a página tenha altura total da viewport */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Wrapper flexível que empurra o footer para o fim */
+.wrapper {
+  min-height: calc(100vh - 56px - 64px); /* Altura total - altura navbar - altura footer */
+}
+
+/* Opcional: se quiser usar flexbox para garantir melhor ajuste */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-menu.show-static {
+  position: static;
+  display: block;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  border: none;
+  box-shadow: none;
+ 
+}
+
+/* Submenu escondido por padrão */
+.submenu {
+  display: none;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Quando ativo, exibe o submenu */
+.dropdown-submenu.show > .submenu {
+  display: block;
+}
+
+@media (max-width: 576px) {
+    body {
+      font-size: 0.9rem !important;
+    }
+    .form-label, .form-control, button {
+      font-size: 0.9rem !important;
+    }
+  }
