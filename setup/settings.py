@@ -10,7 +10,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["stoque-civm.onrender.com"]
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=(Csv()))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
