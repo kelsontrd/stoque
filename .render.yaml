@@ -2,8 +2,11 @@ services:
   - type: web
     name: django-app
     runtime: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn setup.wsgi:application"
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn setup.wsgi:application
+    staticPublishPath: staticfiles
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: setup.settings
