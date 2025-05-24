@@ -67,3 +67,6 @@ class OutProduct(models.Model):
         if self.product and self.operation_description:
             tipo = self.operation_description.type_operation
             self.product.adjust_stock(self.quantity, tipo)
+
+    class Meta:
+        ordering = ['id']

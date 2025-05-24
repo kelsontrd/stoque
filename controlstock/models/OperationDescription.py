@@ -13,3 +13,6 @@ class OperationDescription(models.Model):
         # Retorna uma string com o nome e o tipo de operação (Entrada ou Saída)
         # return f"{self.name} ({'Entrada' if self.type_operation else 'Saida'})"
         return f"{self.name}"
+    
+    class Meta:
+        ordering = ['id']

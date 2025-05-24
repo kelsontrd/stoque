@@ -38,3 +38,6 @@ class Product(models.Model):
             self.increment_stock(quantity)
         else:
             self.decrement_stock(quantity)
+            
+    class Meta:
+        ordering = ['id']

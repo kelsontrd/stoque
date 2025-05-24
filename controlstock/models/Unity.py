@@ -5,7 +5,9 @@ class Unity(models.Model):
     abbreviation = models.CharField(max_length=4, verbose_name="Abreviação")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
-    
+        
     def __str__(self):
         return self.abbreviation
     
+    class Meta:
+        ordering = ['id']
