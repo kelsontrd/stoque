@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 from decouple import config, Csv
 
 from pathlib import Path
@@ -34,7 +35,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    #"django.contrib.staticfiles.middleware.StaticFilesMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
@@ -58,10 +58,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "setup.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': dj_database_url.config(default=config("DATABASE_URL"))
 }
 
 AUTH_PASSWORD_VALIDATORS = [
