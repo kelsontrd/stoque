@@ -9,7 +9,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
+ALLOWED_HOSTS = ["stoque-civm.onrender.com"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "controlstock.apps.ControlstockConfig",
     "crispy_forms",
-    "crispy_bootstrap5"
+    "crispy_bootstrap5",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -93,6 +93,6 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_URL = '/auth/login/'  # ou a rota que você usa
-LOGIN_REDIRECT_URL = '/controlstock/'  # ou a rota para onde vai após login
-LOGOUT_REDIRECT_URL = '/auth/login/'  # ou a rota para onde vai após logout
+LOGIN_URL = "/auth/login/"  # ou a rota que você usa
+LOGIN_REDIRECT_URL = "/controlstock/"  # ou a rota para onde vai após login
+LOGOUT_REDIRECT_URL = "/auth/login/"  # ou a rota para onde vai após logout
